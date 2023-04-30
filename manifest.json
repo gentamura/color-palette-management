@@ -1,0 +1,10 @@
+{
+  "name": "Color Palette Management with JSON",
+  "id": "1233651464692870713",
+  "api": "1.0.0",
+  "main": "code.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": ["figma"],
+  "ui": "ui.html"
+}

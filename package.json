@@ -1,0 +1,21 @@
+{
+  "name": "color-palette-management",
+  "version": "1.0.0",
+  "description": "This Figma plugin is Color Palette Management with JSON",
+  "main": "code.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "npm run build -- --watch"
+  },
+  "author": "Gen Tamura",
+  "license": "MIT",
+  "devDependencies": {
+    "@figma/plugin-typings": "*",
+    "typescript": "*"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all"
+  }
+}
