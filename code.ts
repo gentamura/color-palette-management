@@ -90,16 +90,47 @@ function traverseNestedColors(obj: Record<string, unknown>, name = '') {
 function addPaintStyle(name: string, color: string) {
   const colorStyle = figma.createPaintStyle();
   colorStyle.name = name;
+
+  let figmaColor, opacity;
+  if (color.startsWith('#')) {
+    // NOTE: If the color is in HEX format
+    figmaColor = {
+      r: parseInt(color.substring(1, 3), 16) / 255,
+      g: parseInt(color.substring(3, 5), 16) / 255,
+      b: parseInt(color.substring(5, 7), 16) / 255,
+    };
+    opacity = 1;
+  } else if (color.startsWith('rgba')) {
+    // NOTE: If the color is in RGBA format
+    const { r, g, b, a } = rgbaToFigmaColor(color);
+    figmaColor = { r, g, b };
+    opacity = a;
+  } else {
+    throw new Error(`Unsupported color format: ${color}`);
+  }
+
   colorStyle.paints = [
     {
       type: 'SOLID',
-      color: {
-        r: parseInt(color.substring(1, 3), 16) / 255,
-        g: parseInt(color.substring(3, 5), 16) / 255,
-        b: parseInt(color.substring(5, 7), 16) / 255,
-      },
+      color: figmaColor,
+      opacity: opacity,
     },
   ];
+}
+
+// NOTE: Helper function to convert RGBA color code to Figma's color format
+function rgbaToFigmaColor(rgba: string) {
+  const rgbaValues = rgba
+    .substring(5, rgba.length - 1)
+    .split(',')
+    .map((value) => parseFloat(value.trim()));
+
+  return {
+    r: rgbaValues[0] / 255,
+    g: rgbaValues[1] / 255,
+    b: rgbaValues[2] / 255,
+    a: rgbaValues.length === 4 ? rgbaValues[3] : 1,
+  };
 }
 
 function toHex(decimalValue: number) {
