@@ -373,6 +373,11 @@
               <option value="nested">Nested (hierarchical)</option>
               <option value="flat">Flat (with '/')</option>
             </select>
+            <label for="colorFormat" class="label">Color format:</label>
+            <select id="colorFormat">
+              <option value="hex">Hex</option>
+              <option value="rgba">RGBA</option>
+            </select>
           </div>
 
           <button id="exportButton" class="button">Export Color Styles</button>
@@ -447,9 +452,12 @@
 
       document.getElementById('exportButton').addEventListener('click', () => {
         const exportFormat = document.getElementById('exportFormat').value;
+        const colorFormat = document.getElementById('colorFormat').value;
 
         window.parent.postMessage(
-          { pluginMessage: { type: 'exportColors', exportFormat } },
+          {
+            pluginMessage: { type: 'exportColors', exportFormat, colorFormat },
+          },
           '*',
         );
       });
