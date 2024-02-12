@@ -6,5 +6,8 @@
   "capabilities": [],
   "enableProposedApi": false,
   "editorType": ["figma"],
-  "ui": "ui.html"
+  "ui": "ui.html",
+  "networkAccess": {
+    "allowedDomains": ["none"]
+  }
 }
