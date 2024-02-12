@@ -328,9 +328,8 @@
                 <pre class="example-code">
 {
   "foo": {
-    "bar": {
-      "baz": "#000000"
-    }
+    "bar": "#000000",
+    "baz": "rgba(0, 0, 0, 1)"
   }
 }
 </pre
@@ -341,7 +340,8 @@
                 <summary class="example-title">Example JSON: Flat</summary>
                 <pre class="example-code">
 {
-  "foo/bar/baz": "#000000",
+  "foo/bar": "#000000",
+  "foo/baz": "rgba(0, 0, 0, 1)",
 }
 </pre
                 >
@@ -372,6 +372,11 @@
             <select id="exportFormat">
               <option value="nested">Nested (hierarchical)</option>
               <option value="flat">Flat (with '/')</option>
+            </select>
+            <label for="colorFormat" class="label">Color format:</label>
+            <select id="colorFormat">
+              <option value="hex">Hex</option>
+              <option value="rgba">RGBA</option>
             </select>
           </div>
 
@@ -447,9 +452,12 @@
 
       document.getElementById('exportButton').addEventListener('click', () => {
         const exportFormat = document.getElementById('exportFormat').value;
+        const colorFormat = document.getElementById('colorFormat').value;
 
         window.parent.postMessage(
-          { pluginMessage: { type: 'exportColors', exportFormat } },
+          {
+            pluginMessage: { type: 'exportColors', exportFormat, colorFormat },
+          },
           '*',
         );
       });

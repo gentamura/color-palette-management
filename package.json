@@ -10,8 +10,8 @@
   "author": "Gen Tamura",
   "license": "MIT",
   "devDependencies": {
-    "@figma/plugin-typings": "*",
-    "typescript": "*"
+    "@figma/plugin-typings": "^1.85.0",
+    "typescript": "^5.3.3"
   },
   "prettier": {
     "semi": true,
